@@ -17,7 +17,7 @@ To test: `yarn test`
 - The assignment left me with a lot of freedom, so I started by playing around with ideas for different layouts until I landed on a simple accordion-style "stack of options". It looked compact, yet still elegant. It can be used as an overview as well as a "documentation" of the different intents.
 - As far as components go, I didn't need to extract too many "reusable" pieces, as many were readily available `material-ui`, and I only have a single page, so not much chance for reuse. Instead, I tried to identify the distinct pieces that make up the page - `SelectableIntent`, `ChatBubble`, etc. - and extract these for better readibility.
 - The `intents` constant was very well-formed and followed a predictable format, so in some cases (like the chat bubble previews) I could get away with [accessing properties directly](https://github.com/abelerdesz/intent-wizard/blob/main/src/components/SelectableIntent.tsx#L85).
-- The assignment mentioned tests as a plus, but I decided to include a very basic test suite to cover a few basic cases.
+- The assignment mentioned tests as a plus, but I decided to include a [very basic test suite](https://github.com/abelerdesz/intent-wizard/blob/main/src/pages/Intents.test.tsx) to cover a few basic cases.
 
 ## What I would improve
 
