@@ -18,5 +18,10 @@ export const theme = createTheme({
     h1: {
       fontSize: 39.81
     }
+  },
+  palette: {
+    primary: {
+      main: '#333'
+    }
   }
 });
