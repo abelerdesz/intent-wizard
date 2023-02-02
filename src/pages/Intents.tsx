@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { Box, Button, Container, Typography as Text } from '@mui/material';
-import { intents } from './constants/intents';
-import { IntentId } from './types/Intent';
-import { SelectableIntent } from './components/SelectableIntent';
-import { StepIntroduction } from './components/StepIntroduction';
+import { intents } from '../constants/intents';
+import { IntentId } from '../types/Intent';
+import { SelectableIntent } from '../components/SelectableIntent';
+import { StepIntroduction } from '../components/StepIntroduction';
 
-export const IntentsPage = () => {
+export const Intents = () => {
   const allIntentIds = intents.map((intent) => intent.id);
   const [expandedIntent, setExpandedIntent] = useState<IntentId | null>(null);
   const [selectedIntents, setSelectedIntents] =
