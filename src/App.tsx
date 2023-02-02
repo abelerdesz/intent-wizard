@@ -15,6 +15,7 @@ import { ExpandMore } from '@mui/icons-material';
 import { intents } from './constants/intents';
 import { IntentId } from './types/Intent';
 import { ChatBubble } from './components/ChatBubble';
+import { CoverImage } from './components/CoverImage';
 
 function App() {
   const allIntentIds = intents.map((intent) => intent.id);
@@ -65,20 +66,7 @@ function App() {
             </Text>
           </Grid>
           <Grid item xs={6}>
-            <Box width="100%" height="100%" position="relative">
-              <img
-                src="chat162.svg"
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  objectFit: 'cover',
-                  objectPosition: '33% 73%',
-                  width: '105%',
-                  height: '100%',
-                  opacity: 0.5
-                }}
-              />
-            </Box>
+            <CoverImage src="chat162.svg" width="105%" position="33% 73%" />
           </Grid>
         </Grid>
 
