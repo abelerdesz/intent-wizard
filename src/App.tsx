@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { SyntheticEvent, useState } from 'react';
 import {
   Accordion,
+  AccordionDetails,
   AccordionSummary,
   Box,
   Button,
@@ -12,19 +13,37 @@ import {
 } from '@mui/material';
 import { ExpandMore } from '@mui/icons-material';
 import { intents } from './constants/intents';
-import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
-
-const ChatBubble = styled(Text)`
-  display: flex;
-  alignitems: center;
-  background: blue;
-  color: white;
-  padding: 0.5em 1em;
-  border-radius: 0.2em 1em 1em 1em;
-`;
+import { IntentId } from './types/Intent';
+import { ChatBubble } from './components/ChatBubble';
 
 function App() {
-  const [count, setCount] = useState(0);
+  const allIntentIds = intents.map((intent) => intent.id);
+  const [expandedIntent, setExpandedIntent] = useState<string | null>(null);
+  const [selectedIntents, setSelectedIntents] =
+    useState<IntentId[]>(allIntentIds);
+  const selectAllButtonText = selectedIntents.length
+    ? 'Unselect all'
+    : 'Select all';
+
+  const onAccordionChange = (e: SyntheticEvent, intentId: IntentId) => {
+    if ((e.target as HTMLInputElement).type === 'checkbox') {
+      const idIndex = selectedIntents.indexOf(intentId);
+      if (idIndex > -1) {
+        setSelectedIntents([
+          ...selectedIntents.slice(0, idIndex),
+          ...selectedIntents.slice(idIndex + 1, selectedIntents.length)
+        ]);
+      } else {
+        setSelectedIntents([...selectedIntents, intentId]);
+      }
+    } else {
+      if (expandedIntent === intentId) {
+        setExpandedIntent(null);
+      } else {
+        setExpandedIntent(intentId);
+      }
+    }
+  };
 
   return (
     <Box py={5}>
@@ -40,7 +59,6 @@ function App() {
               are specific to the client's business. Some intents, however, are
               used by almost all of our clients.
             </Text>
-            <Text component="p" mt={2}></Text>
             <Text component="p" mt={2}>
               You can choose to make use of these pretrained intents in your AI
               Bot, and so save time and effort.
@@ -64,20 +82,25 @@ function App() {
           </Grid>
         </Grid>
 
-        <Box mt={6}>
+        <Box mt={7}>
           <Box mb={2} display="flex" justifyContent="flex-end">
-            <Button>Select all</Button>
-          </Box>
-          {intents.map((intent) => (
-            <Accordion
-              expanded={false}
-              onChange={(e) => {
-                if ((e.target as HTMLInputElement).type === 'checkbox') {
-                  console.log('acco clicked', e.target);
+            <Button
+              onClick={() => {
+                if (selectedIntents.length) {
+                  setSelectedIntents([]);
                 } else {
-                  console.log('not a checkboc');
+                  setSelectedIntents(allIntentIds);
                 }
               }}
+            >
+              {selectAllButtonText}
+            </Button>
+          </Box>
+
+          {intents.map((intent) => (
+            <Accordion
+              expanded={expandedIntent === intent.id}
+              onChange={(e) => onAccordionChange(e, intent.id)}
             >
               <AccordionSummary
                 sx={{
@@ -88,30 +111,48 @@ function App() {
                     alignItems: 'center'
                   }
                 }}
-                expandIcon={
-                  <Box mr={1} display="flex" alignItems="center">
-                    <ExpandMore />
-                  </Box>
-                }
+                expandIcon={<ExpandMore />}
                 aria-controls={`panel-intent-${intent.name}-content`}
                 id={`panel-intent-${intent.name}-header`}
               >
-                <Box display="flex" alignItems="center" width="33%">
+                <Box display="flex" alignItems="center" width="33%" pl={2}>
                   <Text>
                     <strong>{intent.name}</strong>
                   </Text>
                 </Box>
-                <ChatBubble variant="body2">
+                <ChatBubble sender="user">
                   {intent.trainingData.expressions[0].text}
                 </ChatBubble>
                 <Box flexGrow={1} display="flex" justifyContent="flex-end">
                   <Checkbox
+                    checked={selectedIntents.includes(intent.id)}
                     onChange={(e) => {
                       e.stopPropagation();
                     }}
                   />
                 </Box>
               </AccordionSummary>
+
+              <AccordionDetails>
+                <Text>{intent.description}</Text>
+                <Box mt={3} mb={1}>
+                  <Text variant="overline">Other examples</Text>
+                </Box>
+                <Box display="flex">
+                  <ChatBubble sender="user">
+                    {intent.trainingData.expressions[1].text}
+                  </ChatBubble>
+                  <ChatBubble sender="user">
+                    {intent.trainingData.expressions[2].text}
+                  </ChatBubble>
+                </Box>
+                <Box mt={3} mb={1}>
+                  <Text variant="overline">Example response</Text>
+                </Box>
+                <Box display="flex">
+                  <ChatBubble sender="bot">{intent.reply.text}</ChatBubble>
+                </Box>
+              </AccordionDetails>
             </Accordion>
           ))}
         </Box>
