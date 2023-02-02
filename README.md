@@ -22,6 +22,6 @@ To test: `yarn test`
 ## What I would improve
 
 - Some files, like `SelectableIntent`, are still a bit cluttered for my taste - I tried to strike a balance between readibility and time-efficiency, but I'm sure things could have been even better organized.
-- Similarly, there's no real reason for an index.css - parts of it could safely be merged with the MUI theme, I think.
+- Similarly, there's no real reason for `styles/index.css` - parts of it could safely be merged with the MUI theme, I think.
 - I didn't put a strong emphasis on accessibility, so I'm sure things like `label`s for the checkboxes would make for a better experience.
 - I wanted to build a better "selection" experience (where the whole row becomes highlighted in some way), but I decided to call it a day and add tests instead. It would've also been fun to build more of the "fake" wizard UI.
