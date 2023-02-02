@@ -46,6 +46,14 @@ function App() {
     }
   };
 
+  const onSelectAllButtonClick = () => {
+    if (selectedIntents.length) {
+      setSelectedIntents([]);
+    } else {
+      setSelectedIntents(allIntentIds);
+    }
+  };
+
   return (
     <Box py={5}>
       <Container maxWidth="md">
@@ -72,15 +80,7 @@ function App() {
 
         <Box mt={7}>
           <Box mb={2} display="flex" justifyContent="flex-end">
-            <Button
-              onClick={() => {
-                if (selectedIntents.length) {
-                  setSelectedIntents([]);
-                } else {
-                  setSelectedIntents(allIntentIds);
-                }
-              }}
-            >
+            <Button onClick={onSelectAllButtonClick}>
               {selectAllButtonText}
             </Button>
           </Box>
