@@ -73,7 +73,7 @@ export const SelectableIntent = ({
       <AccordionDetails>
         <Text>{intent.description}</Text>
 
-        <Box mt={3} mb={0.5}>
+        <Box mt={3} mb={1}>
           <Text variant="overline">Other examples</Text>
         </Box>
 
@@ -86,7 +86,7 @@ export const SelectableIntent = ({
           </ChatBubble>
         </Box>
 
-        <Box mt={3} mb={0.5}>
+        <Box mt={3} mb={1}>
           <Text variant="overline">Example response</Text>
         </Box>
 
