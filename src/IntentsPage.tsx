@@ -5,7 +5,7 @@ import { IntentId } from './types/Intent';
 import { SelectableIntent } from './components/SelectableIntent';
 import { StepIntroduction } from './components/StepIntroduction';
 
-export const App = () => {
+export const IntentsPage = () => {
   const allIntentIds = intents.map((intent) => intent.id);
   const [expandedIntent, setExpandedIntent] = useState<IntentId | null>(null);
   const [selectedIntents, setSelectedIntents] =

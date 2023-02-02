@@ -1,18 +1,18 @@
 import '@testing-library/jest-dom';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { App } from './App';
+import { IntentsPage } from './IntentsPage';
 import { intents } from './constants/intents';
 import { expect } from 'vitest';
 
-describe('<App />', () => {
+describe('<IntentsPage />', () => {
   it('should display the title', () => {
-    render(<App />);
+    render(<IntentsPage />);
 
     expect(screen.getByText('Intents')).toBeVisible();
   });
 
   it('should list all intents by name', () => {
-    render(<App />);
+    render(<IntentsPage />);
 
     intents.forEach((intent) => {
       // Some intent names appear as example messages as well
@@ -21,7 +21,7 @@ describe('<App />', () => {
   });
 
   it('clicking an intent should make the description visible', async () => {
-    render(<App />);
+    render(<IntentsPage />);
 
     const greeting = screen.getByText('Greeting');
     fireEvent.click(greeting);
@@ -31,7 +31,7 @@ describe('<App />', () => {
   });
 
   it('enables intent selection and deselection', async () => {
-    render(<App />);
+    render(<IntentsPage />);
 
     const checkbox1 = screen.getByTestId(`checkbox-${intents[0].id}`);
     fireEvent.click(checkbox1.querySelector('input') as HTMLInputElement);
