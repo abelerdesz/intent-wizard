@@ -8,3 +8,5 @@ export interface Intent {
   trainingData: TrainingData;
   reply: Expression;
 }
+
+export type IntentId = Intent['id'];
