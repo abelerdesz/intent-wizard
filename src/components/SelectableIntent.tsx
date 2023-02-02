@@ -66,7 +66,10 @@ export const SelectableIntent = ({
         </ChatBubble>
 
         <Box flexGrow={1} display="flex" justifyContent="flex-end">
-          <Checkbox checked={isSelected} />
+          <Checkbox
+            checked={isSelected}
+            data-testid={`checkbox-${intent.id}`}
+          />
         </Box>
       </StyledAccordionSummary>
 
