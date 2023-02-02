@@ -9,7 +9,7 @@ const StyledTypography = styled(Typography)<Props>`
   display: flex;
   alignitems: center;
   background: ${(props) =>
-    props.sender === 'user' ? 'cornflowerblue' : 'darkcyan'};
+    props.sender === 'user' ? 'royalblue' : 'darkcyan'};
   color: white;
   padding: 0.5em 1em;
   margin-right: 1em;
